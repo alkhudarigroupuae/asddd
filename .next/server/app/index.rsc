@@ -1,0 +1,9 @@
+2:I[9107,[],"ClientPageRoot"]
+3:I[6401,["648","static/chunks/648-235906d466863ad0.js","26","static/chunks/26-56e5d43a8c9c8cc1.js","662","static/chunks/662-596450ef8c80e563.js","295","static/chunks/295-d8e2c68f228d2dad.js","931","static/chunks/app/page-0d797417f1aba1e2.js"],"default",1]
+4:I[938,["185","static/chunks/app/layout-dfde4e82f1e1db6d.js"],"AppGate"]
+5:I[4707,[],""]
+6:I[6423,[],""]
+7:I[5292,["648","static/chunks/648-235906d466863ad0.js","160","static/chunks/app/not-found-6314a59f211821f5.js"],"default"]
+0:["Bpw7D8SCbTT0Gi3DC8W0t",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",{"children":["__PAGE__",{},[["$L1",["$","$L2",null,{"props":{"params":{},"searchParams":{}},"Component":"$3"}],null],null],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/8d7f51b13bc53c35.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","className":"dark","children":["$","body",null,{"className":"__className_f367f3 bg-black text-slate-100 antialiased min-h-screen selection:bg-indigo-500/30 selection:text-indigo-200","children":["$","div",null,{"className":"h-screen overflow-hidden w-full","children":["$","$L4",null,{"children":["$","$L5",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L7",null,{}],"notFoundStyles":[]}]}]}]}]}]],null],null],["$L8",null]]]]
+8:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"Dr Belal Crypto Generator"}],["$","meta","3",{"name":"description","content":"Deploy ERC-20 & BEP-20 tokens securely from your browser."}],["$","link","4",{"rel":"icon","href":"/icon.svg"}],["$","meta","5",{"name":"next-size-adjust"}]]
+1:null

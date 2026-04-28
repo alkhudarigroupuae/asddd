@@ -1,3 +1,5 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/tron-balance/page": "app/tron-balance/page.js",
   "/page": "app/page.js"
 }
