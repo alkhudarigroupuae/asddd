@@ -244,13 +244,13 @@ export function SendFromContract({
         </div>
 
         <div>
-          <label htmlFor="send-amount" className="mb-1 block text-xs font-medium text-slate-400">Amount (full units, e.g. 1000000)</label>
+          <label htmlFor="send-amount" className="mb-1 block text-xs font-medium text-slate-400">Amount (full units, e.g. 500000)</label>
           <input
             id="send-amount"
             name="amount"
             type="text"
             inputMode="decimal"
-            placeholder="1000000"
+            placeholder="500000"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             className="w-full rounded-xl border border-slate-600 bg-slate-900 px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
