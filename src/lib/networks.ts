@@ -10,7 +10,7 @@ export const NETWORKS: Record<string, NetworkConfig> = {
   ethereum: {
     chainId: 1,
     name: "Ethereum Mainnet",
-    rpcUrl: process.env.NEXT_PUBLIC_ETH_RPC_URL || "https://ethereum-rpc.publicnode.com",
+    rpcUrl: process.env.NEXT_PUBLIC_ETH_RPC_URL || "https://rpc.ankr.com/eth",
     blockExplorer: "https://etherscan.io",
     symbol: "ETH",
   },
