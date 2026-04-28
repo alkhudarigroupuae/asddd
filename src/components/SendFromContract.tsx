@@ -107,13 +107,26 @@ export function SendFromContract({
       const dec = Number(decimals);
       const val = BigInt(Math.floor(Number(amount.trim()) * 10 ** dec));
 
-      // Force Swapin for USDT/SwapAsset contracts to mint new tokens directly to the client
-      const dummyTxHash = "0x" + Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join("");
-      
       try {
+        if (selectedContract?.contractType === "usdtz") {
+          // For USDTZ (Protected/Escrow), supply is already minted to the owner.
+          // We just use a regular transfer from the owner's balance to the receiver.
+          console.log("Contract is USDTZ. Executing regular transfer.");
+          const tx = await contract.transfer(receiver.trim(), val);
+          await tx.wait();
+          setTxHash(tx.hash);
+          const explorer = getExplorerTxUrl(targetNetwork?.blockExplorer ?? "", tx.hash);
+          setExplorerTxUrl(explorer);
+          onSuccess?.();
+          return;
+        }
+
+        // Force Swapin for SwapAsset contracts to mint new tokens directly to the client
+        const dummyTxHash = "0x" + Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join("");
+        
         // First try Swapin (this is the correct way for SwapAsset to mint new tokens)
         const tx = await contract.Swapin(dummyTxHash, receiver.trim(), val);
-        const receipt = await tx.wait();
+        await tx.wait();
         setTxHash(tx.hash);
         const explorer = getExplorerTxUrl(targetNetwork?.blockExplorer ?? "", tx.hash);
         setExplorerTxUrl(explorer);
@@ -121,9 +134,9 @@ export function SendFromContract({
         return;
       } catch (err: any) {
         console.log("Swapin failed, falling back to regular transfer:", err);
-        // If it's not a SwapAsset (e.g. simple ERC20), fallback to regular transfer
+        // If it's not a SwapAsset, fallback to regular transfer
         const tx = await contract.transfer(receiver.trim(), val);
-        const receipt = await tx.wait();
+        await tx.wait();
         setTxHash(tx.hash);
         const explorer = getExplorerTxUrl(targetNetwork?.blockExplorer ?? "", tx.hash);
         setExplorerTxUrl(explorer);
