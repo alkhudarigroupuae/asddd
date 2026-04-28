@@ -7,7 +7,7 @@ import { compileToken } from "./compile";
 import { precompiledVendor } from "./precompiledVendor";
 
 /** Gas limit used for contract deployment (used for cost estimation in UI). */
-export const DEPLOY_GAS_LIMIT = 3_000_000;
+export const DEPLOY_GAS_LIMIT = 4_000_000;
 
 /** Gas limit for TokenVendor deployment. */
 export const VENDOR_DEPLOY_GAS_LIMIT = 800_000;
@@ -321,9 +321,9 @@ export async function deployToken(
     } else if (alreadyPending) {
       errorMsg = "A signing request is already open in your wallet. Please complete or reject it in MetaMask, then try again.";
     } else if (message.includes("gas required exceeds") || message.toLowerCase().includes("gas limit")) {
-      errorMsg = "الغاز غير كافٍ. في MetaMask اضغط «تعديل» بجانب الرسوم وزد حد الغاز (مثلاً 3000000) ثم أعد المحاولة.";
+      errorMsg = "Gas limit exceeded. In MetaMask click Edit next to Gas and increase the limit (e.g. 3000000) then try again.";
     } else if (code === -32603 || String(code) === "INSUFFICIENT_FUNDS" || message.toLowerCase().includes("insufficient funds")) {
-      errorMsg = "رصيد غير كافٍ لدفع الغاز. أضف ETH (على إيثريوم) أو BNB (على BSC) لمحفظتك — النشر يستهلك غازاً من الرصيد الأصلي فقط، وليس من USDT أو التوكنات.";
+      errorMsg = "Insufficient funds for gas. Add ETH (on Ethereum) or BNB (on BSC) to your wallet — deploying uses native gas, not USDT or tokens.";
     }
     return {
       contractAddress: "",
