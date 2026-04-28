@@ -92,9 +92,9 @@ export function Header() {
               Download MetaMask ←
             </a>
           )}
-          {error.includes("رابط RPC") && (
+          {error.includes("RPC") && (
             <p className="text-xs text-slate-400 mt-1">
-              RPC ready to copy: <code className="text-gold/80 bg-black/30 px-1 rounded">https://eth.llamarpc.com</code>
+              RPC ready to copy: <code className="text-gold/80 bg-black/30 px-1 rounded">https://ethereum-rpc.publicnode.com</code> or <code className="text-gold/80 bg-black/30 px-1 rounded">https://rpc.ankr.com/eth</code>
             </p>
           )}
         </div>

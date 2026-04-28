@@ -29,7 +29,7 @@ function getProviderName(provider: unknown, index: number): string {
 }
 
 const RPC_ERROR_MSG =
-  "The wallet is using an invalid or expired RPC URL. Change the RPC in your wallet settings: Settings → Networks → Ethereum Mainnet → RPC URL. Use a reliable public RPC like: https://ethereum-rpc.publicnode.com or https://rpc.ankr.com/eth";
+  "تستخدم المحفظة رابط RPC غير صالح أو منتهي الصلاحية. قم بتغيير رابط RPC في إعدادات محفظتك: Settings → Networks → Ethereum Mainnet → RPC URL. استخدم رابط عام موثوق مثل: https://ethereum-rpc.publicnode.com أو https://rpc.ankr.com/eth";
 
 function isInvalidRpcError(e: unknown): boolean {
   const msg = (e as { message?: string })?.message ?? String(e);
