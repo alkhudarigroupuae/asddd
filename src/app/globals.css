@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Royal Dark Theme */
+  --bg: #050505;
+  --bg-elevated: #0a0a0a;
+  --bg-card: rgba(10, 10, 10, 0.7);
+  --accent: #D4AF37; /* Gold */
+  --accent-light: #F4E4BC;
+  --accent-dim: rgba(212, 175, 55, 0.15);
+  --accent-glow: rgba(212, 175, 55, 0.5);
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: rgba(212, 175, 55, 0.2);
+  --radius: 1rem;
+  --radius-lg: 1.5rem;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  background: var(--bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  @apply antialiased;
+  background: radial-gradient(circle at top center, #1a1a1a 0%, #050505 100%) !important;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .glass {
+    @apply backdrop-blur-md bg-opacity-70 border border-[var(--border)];
+    background-color: var(--bg-card);
+  }
+  
+  .glass-panel {
+    background: linear-gradient(145deg, rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.9));
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-gold {
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  }
+  
+  .border-gold {
+    border-color: var(--accent);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #D4AF37 0%, #AA8A28 100%);
+    color: #000;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .input-field {
+    @apply bg-black/40 border border-[var(--border)] text-white placeholder-slate-500 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)];
+  }
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-dim);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Animations */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px var(--accent-dim); }
+  50% { box-shadow: 0 0 20px var(--accent-dim); }
+}
+
+.animate-glow {
+  animation: glow 3s infinite;
+}
