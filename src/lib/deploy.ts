@@ -457,7 +457,7 @@ export async function deployVendor(
     if (message.includes("user rejected") || message.includes("denied")) {
       errorMsg = "You rejected the transaction in your wallet.";
     } else if (code === -32603 || message.toLowerCase().includes("insufficient funds")) {
-      errorMsg = "رصيد غير كافٍ. أضف ETH أو BNB لدفع الغاز.";
+      errorMsg = "Insufficient funds. Please add ETH or BNB to pay for gas.";
     }
     return {
       vendorAddress: "",

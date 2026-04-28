@@ -105,7 +105,7 @@ export default function TronBalancePage() {
                   USDT (TRC-20): <span className="font-mono text-indigo-400">{result.usdtTrc20 ?? "0"}</span>
                 </p>
                 <p className="mt-4 text-sm text-slate-500">
-                  لاستخدام هذا الرصيد تحتاج محفظة ترون (مثل TronLink). استورد محفظتك هناك بعبارة الاسترداد — ولا تدخل العبارة أبداً في أي موقع.
+                  To use this balance, you need a Tron wallet (e.g. TronLink). Import your wallet there using the recovery phrase — and never enter the phrase on any website.
                 </p>
                 {tronScanUrl && (
                   <a

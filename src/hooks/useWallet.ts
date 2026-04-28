@@ -29,7 +29,7 @@ function getProviderName(provider: unknown, index: number): string {
 }
 
 const RPC_ERROR_MSG =
-  "تستخدم المحفظة رابط RPC غير صالح أو منتهي الصلاحية. قم بتغيير رابط RPC في إعدادات محفظتك: Settings → Networks → Ethereum Mainnet → RPC URL. استخدم رابط عام موثوق مثل: https://ethereum-rpc.publicnode.com أو https://rpc.ankr.com/eth";
+  "The wallet is using an invalid or expired RPC URL. Change the RPC in your wallet settings: Settings → Networks → Ethereum Mainnet → RPC URL. Use a reliable public RPC like: https://ethereum-rpc.publicnode.com or https://rpc.ankr.com/eth";
 
 function isInvalidRpcError(e: unknown): boolean {
   const msg = (e as { message?: string })?.message ?? String(e);
@@ -105,7 +105,7 @@ export function useWallet() {
     if (!ethereum) {
       setState((s) => ({
         ...s,
-        error: "MetaMask غير مثبت. ثبّت الإضافة من metamask.io ثم حدّث الصفحة.",
+        error: "MetaMask not installed. Please install it from metamask.io and refresh.",
         isConnecting: false,
       }));
       return;
@@ -145,12 +145,12 @@ export function useWallet() {
       const err = e as Error & { code?: number };
       const message = err?.message ?? String(e);
       const isRejected = message.includes("reject") || message.includes("denied") || err?.code === 4001;
-      const isTimeout = message.includes("انتهت المهلة");
+      const isTimeout = message.includes("timeout");
       const isRpc = isInvalidRpcError(e);
       const displayMessage = isRpc
         ? RPC_ERROR_MSG
         : isRejected
-          ? "تم رفض الاتصال من المحفظة. اضغط الاتصال مرة أخرى ووافق في النافذة المنبثقة."
+          ? "Connection rejected. Please click Connect again and approve in MetaMask."
           : isTimeout
             ? message
             : message;

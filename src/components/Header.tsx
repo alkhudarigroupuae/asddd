@@ -87,7 +87,7 @@ export function Header() {
       {error && (
         <div className="w-full px-4 sm:px-6 py-3 space-y-1 border-t border-white/5 bg-red-900/10 backdrop-blur-sm">
           <p className="text-sm text-red-400 font-medium">{error}</p>
-          {error.includes("غير مثبت") && (
+          {error.includes("not installed") && (
             <a href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer" className="text-xs text-gold hover:underline">
               Download MetaMask ←
             </a>

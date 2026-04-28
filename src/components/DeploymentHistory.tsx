@@ -52,13 +52,13 @@ function formatTimeAgo(ts: number, nowMs: number = Date.now()): string {
   const diffHour = Math.floor(diffMin / 60);
   const diffDay = Math.floor(diffHour / 24);
 
-  if (diffSec < 60) return "منذ لحظات";
-  if (diffMin === 1) return "منذ دقيقة";
-  if (diffMin < 60) return `منذ ${diffMin} دقيقة`;
-  if (diffHour === 1) return "منذ ساعة";
-  if (diffHour < 24) return `منذ ${diffHour} ساعة`;
-  if (diffDay === 1) return "منذ يوم";
-  if (diffDay < 7) return `منذ ${diffDay} يوم`;
+  if (diffSec < 60) return "Just now";
+  if (diffMin === 1) return "1 minute ago";
+  if (diffMin < 60) return `${diffMin} minutes ago`;
+  if (diffHour === 1) return "1 hour ago";
+  if (diffHour < 24) return `${diffHour} hours ago`;
+  if (diffDay === 1) return "1 day ago";
+  if (diffDay < 7) return `${diffDay} days ago`;
   return formatTime(ts);
 }
 
@@ -207,7 +207,7 @@ export function DeploymentHistory({
                         type="text"
                         value={editLabelValue}
                         onChange={(e) => setEditLabelValue(e.target.value)}
-                        placeholder="تسمية..."
+                        placeholder="Label..."
                         className="w-32 rounded-lg border border-slate-600 bg-black/50 px-2 py-1 text-xs text-white focus:border-gold"
                         autoFocus
                       />
@@ -219,7 +219,7 @@ export function DeploymentHistory({
                         }}
                         className="text-xs text-gold hover:underline"
                       >
-                        حفظ
+                        Save
                       </button>
                     </div>
                   ) : (
@@ -230,7 +230,7 @@ export function DeploymentHistory({
                       }}
                       className="text-xs text-slate-600 hover:text-gold transition-colors"
                     >
-                      {record.label ? `🏷️ ${record.label}` : "+ إضافة تسمية"}
+                      {record.label ? `🏷️ ${record.label}` : "+ Add Label"}
                     </button>
                   )}
                 </div>
@@ -312,19 +312,19 @@ export function DeploymentHistory({
                      <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-red-500/50 to-transparent" />
                      
                      <p className="mb-3 font-bold text-red-400 flex items-center gap-2">
-                       <span>🛡️</span> استرداد الأموال (Payment Protection / Refund)
+                       <span>🛡️</span> Refund (Payment Protection)
                      </p>
                      
                      <div className="bg-red-950/20 p-4 rounded-lg border border-red-500/20 mb-4">
                        <p className="text-xs text-red-200 mb-2 leading-relaxed">
-                         <strong>حماية ضد الاحتيال:</strong> بصفتك مالك العقد، يمكنك سحب التوكنات من المحفظة المستلمة وإعادتها إليك.
+                         <strong>Fraud Protection:</strong> As the contract owner, you can pull tokens from the recipient wallet and return them to yourself.
                          <br/>
-                         هذا مفيد إذا لم يقم الطرف الآخر بتنفيذ الاتفاق (مثل عدم شحن البضاعة).
+                         Useful if the other party fails to deliver (e.g. didn't ship the goods).
                        </p>
                        
                        <div className="space-y-3">
                          <div>
-                           <label className="block text-xs font-medium text-slate-400 mb-1">عنوان المحفظة (المحتال / البائع)</label>
+                           <label className="block text-xs font-medium text-slate-400 mb-1">Wallet Address (Scammer / Seller)</label>
                            <input
                              type="text"
                              value={refundAddress}
@@ -391,12 +391,12 @@ export function DeploymentHistory({
                     </p>
                     
                     <ol className="mb-4 list-decimal list-inside space-y-2 text-xs text-slate-300 bg-black/20 p-4 rounded-lg border border-white/5">
-                      <li>اضغط «فتح صفحة التحقق» أدناه.</li>
-                      <li>اختر <strong>Solidity (Single file)</strong>، المترجم <strong>{verification.compilerVersion}</strong>.</li>
-                      <li>انسخ كود المصدر من الرابط «كود المصدر» أو من ملف <code className="text-gold">public/contracts/ERC20Template.sol</code>.</li>
-                      <li>الصقه في الحقل في Etherscan/BscScan.</li>
-                      <li>انسخ <strong>Constructor Arguments</strong> من الأسفل والصقه في الحقل المخصص.</li>
-                      <li>اضغط <strong>Verify and Publish</strong>.</li>
+                      <li>Click «Open Verification Page» below.</li>
+                      <li>Select <strong>Solidity (Single file)</strong>, Compiler <strong>{verification.compilerVersion}</strong>.</li>
+                      <li>Copy source code from the «Source Code» link or from file <code className="text-gold">public/contracts/ERC20Template.sol</code>.</li>
+                      <li>Paste it in the designated field in Etherscan/BscScan.</li>
+                      <li>Copy <strong>Constructor Arguments</strong> from below and paste in the designated field.</li>
+                      <li>Click <strong>Verify and Publish</strong>.</li>
                     </ol>
                     
                     <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -406,7 +406,7 @@ export function DeploymentHistory({
                         rel="noopener noreferrer"
                         className="btn-primary rounded-lg px-4 py-2 text-xs font-bold shadow-lg"
                       >
-                        🚀 فتح صفحة التحقق
+                        🚀 Open Verification Page
                       </a>
                       <a
                         href="/contracts/ERC20Template.sol"
@@ -414,13 +414,13 @@ export function DeploymentHistory({
                         rel="noopener noreferrer"
                         className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-xs text-slate-200 hover:bg-white/10 hover:text-white transition-all"
                       >
-                        📄 كود المصدر
+                        📄 Source Code
                       </a>
                     </div>
                     
                     {verification.supported ? (
                       <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-400 block">Constructor Arguments (للنسخ):</label>
+                        <label className="text-xs font-bold text-slate-400 block">Constructor Arguments (for copying):</label>
                         <div className="flex items-center gap-2">
                           <code className="flex-1 truncate rounded bg-black/60 border border-white/10 px-3 py-2 font-mono text-xs text-gold/80" title={verification.constructorArgumentsHex}>
                             {verification.constructorArgumentsHex.slice(0, 60)}…
@@ -434,13 +434,13 @@ export function DeploymentHistory({
                             }}
                             className="rounded-lg bg-emerald-600/20 border border-emerald-500/50 px-3 py-2 text-xs font-bold text-emerald-400 hover:bg-emerald-600/30 transition-all"
                           >
-                            {copiedConstructorArgs === record.contractAddress ? "تم النسخ ✓" : "نسخ"}
+                            {copiedConstructorArgs === record.contractAddress ? "Copied ✓" : "Copy"}
                           </button>
                         </div>
                       </div>
                     ) : (
                       <p className="text-xs text-amber-400 bg-amber-900/20 p-2 rounded border border-amber-500/20">
-                        ⚠️ هذا العقد ({verification.contractName}) يتطلب كود مصدر خاص. يرجى التحقق من ملفات المشروع.
+                        ⚠️ This contract ({verification.contractName}) requires a custom source code file. Please check the project files.
                       </p>
                     )}
                   </div>
