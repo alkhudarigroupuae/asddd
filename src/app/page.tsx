@@ -12,6 +12,7 @@ import { DeploymentHistory } from "@/components/DeploymentHistory";
 import { SendFromContract } from "@/components/SendFromContract";
 import { VendorSection } from "@/components/VendorSection";
 import { CustomTokenAdd } from "@/components/CustomTokenAdd";
+import { TronClone } from "@/components/TronClone";
 import { useWallet } from "@/hooks/useWallet";
 import { useNativePrice } from "@/hooks/useNativePrice";
 import { useSearchParams } from "next/navigation";
@@ -449,6 +450,10 @@ function HomeContent() {
 
             {view === "customAdd" && (
               <CustomTokenAdd />
+            )}
+
+            {view === "tron_clone" && (
+              <TronClone />
             )}
 
             {view === "create" && (

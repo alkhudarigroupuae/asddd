@@ -16,7 +16,8 @@
     "next": "^14.2.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
-    "solc": "^0.8.28"
+    "solc": "^0.8.28",
+    "tronweb": "^6.3.0"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^4.0.0",
